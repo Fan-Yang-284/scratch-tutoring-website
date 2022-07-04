@@ -4,13 +4,13 @@ import useWindowDimensions from "../../hooks/useWindowDimensions"
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
 
-const Navbar = ({ current }: {current: string}) => {
-	const links = [
-		"Home",
-		"About",
-		"Course Materials",
-		"Contact",
-	]
+const Navbar = () => {
+	const links = {
+		"Home":"",
+		"About":"about",
+		"Course Materials":"course_materials",
+		"Contact":"contact",
+	}
 
 	const listVariants = {
 		open: {
@@ -27,7 +27,7 @@ const Navbar = ({ current }: {current: string}) => {
 	return (
 		<motion.div
 			className="absolute w-full"
-			animate={{ y: [-60, width! > 768 ? 15 : 0] }}
+			animate={{ y: ["-100%", width! > 768 ? "35%" : "0%"] }}
 			viewport={{ once: true }}
 			transition={{ delay: 0.4, duration: 0.4 }}
 		>
@@ -35,7 +35,7 @@ const Navbar = ({ current }: {current: string}) => {
 				<div className="flex flex-wrap justify-between items-center">
 					{/* Left Side Image */}
 					<a href="https://flowbite.com/" className="flex items-center">
-						<img src="https://scratch.mit.edu/images/scratch-og.png" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
+						<img src="https://mpng.subpng.com/20180420/jrq/kisspng-scratch-computer-science-logo-computer-programming-5ada13885f58b7.2044957615242412883906.jpg" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
 						<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">Scratch Coding</span>
 					</a>
 					{/* Center links */}
@@ -53,7 +53,11 @@ const Navbar = ({ current }: {current: string}) => {
 							initial={false}
 						>
 							{
-								links.map((link, i) => <MenuItem isCurrent={current === link} linkName={link} key={i}/>)
+								Object
+									.entries(links)
+									.map((link, i) =>
+										<MenuItem linkName={link[0]} linkPath={link[1]} key={i}/>
+									)
 							}
 						</motion.ul>
 					</div>
