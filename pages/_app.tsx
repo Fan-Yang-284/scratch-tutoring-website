@@ -5,7 +5,7 @@ import Navbar from '../components/NavBar'
 function MyApp({ Component, pageProps }: AppProps) {
   return(
   <>
-			<Navbar current="Home"/>
+			<Navbar/>
       <Component {...pageProps} />
   </>
   )

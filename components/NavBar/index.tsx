@@ -1,5 +1,6 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
 import { motion, useCycle } from "framer-motion"
+import Link from "next/link"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
@@ -34,15 +35,19 @@ const Navbar = () => {
 			<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 md:rounded-lg dark:bg-gray-800 mx-auto md:w-11/12 relative">
 				<div className="flex flex-wrap justify-between items-center">
 					{/* Left Side Image */}
-					<a href="https://flowbite.com/" className="flex items-center">
-						<img src="https://mpng.subpng.com/20180420/jrq/kisspng-scratch-computer-science-logo-computer-programming-5ada13885f58b7.2044957615242412883906.jpg" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
-						<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">Scratch Coding</span>
-					</a>
+					<Link href="/">
+						<a className="flex items-center">
+							<img src="https://mpng.subpng.com/20180420/jrq/kisspng-scratch-computer-science-logo-computer-programming-5ada13885f58b7.2044957615242412883906.jpg" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
+							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">
+								Edwin and Fan Tutoring
+							</span>
+						</a>
+					</Link>
 					{/* Center links */}
 					<div
 						className="
 							justify-between items-center w-full
-							absolute top-[68px] left-0
+							absolute top-[100%] left-0
 							md:flex md:static md:w-auto"
 						id="mobile-menu-4"
 					>
