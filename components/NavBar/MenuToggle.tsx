@@ -15,7 +15,7 @@ export const MenuToggle = ({ toggle, isOpen }: {isOpen: boolean, toggle: any}) =
 	<motion.button
 		onClick={toggle} 
 		animate={isOpen ? "open" : "closed"}
-		className="inline-flex items-center p-[0.55rem] rounded-lg md:hidden 
+		className="inline-flex items-center p-[0.55rem] rounded-lg lg:hidden 
 			hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200
 			dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-4"
 	>

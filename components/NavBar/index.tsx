@@ -1,16 +1,17 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
 import { motion, useCycle } from "framer-motion"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
+import Link from "next/link"
+import useWindowDimensions from "hooks/useWindowDimensions"
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
 
-const Navbar = ({ current }: {current: string}) => {
-	const links = [
-		"Home",
-		"About",
-		"Course Materials",
-		"Contact",
-	]
+const Navbar = () => {
+	const links = {
+		"Home":"",
+		"Courses":"courses",
+		"About":"about",
+		"Contact":"contact",
+	}
 
 	const listVariants = {
 		open: {
@@ -26,41 +27,49 @@ const Navbar = ({ current }: {current: string}) => {
 	
 	return (
 		<motion.div
-			className="absolute w-full"
-			animate={{ y: [-60, width! > 768 ? 15 : 0] }}
+			className="fixed w-full"
+			animate={{ y: ["-100%", width! > 1024 ? "35%" : "0%"] }}
 			viewport={{ once: true }}
 			transition={{ delay: 0.4, duration: 0.4 }}
 		>
-			<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 md:rounded-lg dark:bg-gray-800 mx-auto md:w-11/12 relative">
+			<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 lg:rounded-lg dark:bg-gray-800 mx-auto lg:w-11/12 relative">
 				<div className="flex flex-wrap justify-between items-center">
 					{/* Left Side Image */}
-					<a href="https://flowbite.com/" className="flex items-center">
-						<img src="https://scratch.mit.edu/images/scratch-og.png" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
-						<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">Scratch Coding</span>
-					</a>
+					<Link href="/">
+						<a className="flex items-center">
+							<img src="/scratch.png" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
+							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">
+								Edwin and Fan Tutoring
+							</span>
+						</a>
+					</Link>
 					{/* Center links */}
 					<div
 						className="
 							justify-between items-center w-full
-							absolute top-[68px] left-0
-							md:flex md:static md:w-auto"
+							absolute top-[100%] left-0
+							lg:flex lg:static lg:w-auto"
 						id="mobile-menu-4"
 					>
 						<motion.ul
-							className="flex flex-col md:flex-row md:space-x-8 mt-0 md:text-sm md:font-medium"
+							className="flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium"
 							variants={listVariants}
-							animate={isOpen || width! > 768 ? "open" : "closed"}
+							animate={isOpen || width! > 1024 ? "open" : "closed"}
 							initial={false}
 						>
 							{
-								links.map((link, i) => <MenuItem isCurrent={current === link} linkName={link} key={i}/>)
+								Object
+									.entries(links)
+									.map((link, i) =>
+										<MenuItem linkName={link[0]} linkPath={link[1]} key={i}/>
+									)
 							}
 						</motion.ul>
 					</div>
 
 					{/* Right side */}
 					<div className="flex items-center">
-						<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
+						<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
 						<MenuToggle isOpen={isOpen} toggle={toggleOpen} />
 					</div>
 				</div>
