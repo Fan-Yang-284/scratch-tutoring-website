@@ -1,5 +1,5 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
-import { motion, useCycle } from "framer-motion"
+import { motion, useCycle, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import useWindowDimensions from "hooks/useWindowDimensions"
 import MenuItem from "./MenuItem"
@@ -13,21 +13,12 @@ const Navbar = () => {
 		"Contact":"contact",
 	}
 
-	const listVariants = {
-		open: {
-			transition: { staggerChildren: 0.07, delayChildren: 0.2 }
-		},
-		closed: {
-			transition: { staggerChildren: 0.05, staggerDirection: -1 }
-		}
-	};
-
 	const { height, width } = useWindowDimensions();
 	const [isOpen, toggleOpen] = useCycle(false, true);
 
 	return (
 		<motion.div
-			className="fixed w-full"
+			className="fixed w-full z-50"
 			animate={{ y: ["-100%", width! > 1024 ? "35%" : "0%"] }}
 			viewport={{ once: true }}
 			transition={{ delay: 0.4, duration: 0.4 }}
@@ -51,19 +42,16 @@ const Navbar = () => {
 							lg:flex lg:static lg:w-auto"
 						id="mobile-menu-4"
 					>
-						<motion.ul
-							className="text-black flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium"
-							variants={listVariants}
-							animate={isOpen || width! > 1024 ? "open" : "closed"}
-							initial={false}
-						>
-							{
-								Object
-									.entries(links)
-									.map((link, i) =>
-										<MenuItem linkName={link[0]} linkPath={link[1]} key={i}/>
+						<motion.ul className="text-black flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium" >
+							<AnimatePresence>
+								{
+									(isOpen || width! > 1024) &&
+									Object.entries(links).map((link, i) =>
+										<MenuItem linkName={link[0]} linkPath={link[1]} key={i} elementNum={i}/>
 									)
-							}
+								}
+								{/* <motion.p initial={{opacity:0}} animate={{opacity:1}} key="22">hello</motion.p> */}
+							</AnimatePresence>
 						</motion.ul>
 					</div>
 
