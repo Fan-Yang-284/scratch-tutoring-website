@@ -1,4 +1,4 @@
-const course_materials = () => {
+const courseID = () => {
     return (
         <div>
             Enter
@@ -6,4 +6,4 @@ const course_materials = () => {
     );
 }
 
-export default course_materials;
+export default courseID;
