@@ -1,5 +1,6 @@
 import CourseCard from "components/CourseCard";
 import Course from "types/Course";
+import { motion } from "framer-motion";
 
 const course_materials = () => {
 	const courses = [
@@ -26,9 +27,9 @@ const course_materials = () => {
 				<h1 className="text-white font-black text-5xl">Offered Courses</h1>
 			</div>
 			<div className="grid place-items-center">
-				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-11/12 py-4">
+				<motion.div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-11/12 py-4">
 					{ courses.map((course: Course, i) => <CourseCard course={course} key={i} />) }
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);
