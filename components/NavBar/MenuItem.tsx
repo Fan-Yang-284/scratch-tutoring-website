@@ -24,9 +24,9 @@ const MenuItem = ({ linkName, linkPath }: { linkName: string, linkPath: string})
 	return (
 		<motion.li variants={variants}>
 			<Link href={"/" + linkPath} >
-				<a className={"block py-2 px-4 transition-colors lg:bg-transparent hover:text-white " +
+				<a className={"block py-2 px-4 transition-colors lg:bg-transparent hover:text-gray-500 " +
 					(router.pathname.split("/")[1] == linkPath ?
-					"bg-blue-700 text-white" :
+					"bg-blue-700 font-bold text-gray-400" :
 					"bg-blue-900 text-gray-400"
 					)}
 				>

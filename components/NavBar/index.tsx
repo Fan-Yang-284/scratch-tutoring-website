@@ -24,7 +24,7 @@ const Navbar = () => {
 
 	const { height, width } = useWindowDimensions();
 	const [isOpen, toggleOpen] = useCycle(false, true);
-	
+
 	return (
 		<motion.div
 			className="fixed w-full"
@@ -52,7 +52,7 @@ const Navbar = () => {
 						id="mobile-menu-4"
 					>
 						<motion.ul
-							className="flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium"
+							className="text-black flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium"
 							variants={listVariants}
 							animate={isOpen || width! > 1024 ? "open" : "closed"}
 							initial={false}
