@@ -4,6 +4,9 @@ import Link from "next/link"
 import useWindowDimensions from "hooks/useWindowDimensions"
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
+import RegisterModal from "components/RegisterModal/modal"
+import * as React from 'react';
+
 
 const Navbar = () => {
 	const links = {
@@ -24,6 +27,8 @@ const Navbar = () => {
 
 	const { height, width } = useWindowDimensions();
 	const [isOpen, toggleOpen] = useCycle(false, true);
+
+	const [register, toggleRegister] = React.useState(false)
 
 	return (
 		<motion.div
