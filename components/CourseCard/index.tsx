@@ -9,7 +9,7 @@ const CourseCard = ({course}: {course: Course}) => {
 	}
 
 	return (
-		<Link href={course.courseURL}>
+		<Link href={"/courses" + course.courseURL}>
 			<motion.a
 				className="w-full h-full block rounded-lg pt-16 text-white hover:cursor-pointer relative overflow-hidden group"
 				initial={"hidden"}
