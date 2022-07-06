@@ -1,5 +1,5 @@
-import CourseCard from "components/CourseCard";
-import Course from "types/Course";
+import CourseCard from "../../components/CourseCard";
+import Course from "../../types/Course";
 import { motion } from "framer-motion";
 
 const course_materials = () => {

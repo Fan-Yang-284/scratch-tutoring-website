@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Navbar from '../components/NavBar'
-import Banner from '../components/Banner'
 import Hero from '../components/Hero'
 
 export default function Home() {

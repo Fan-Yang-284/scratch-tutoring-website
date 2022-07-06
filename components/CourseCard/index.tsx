@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Course from "types/Course";
+import Course from "../../types/Course";
 import { motion } from "framer-motion";
 
 const CourseCard = ({course}: {course: Course}) => {
