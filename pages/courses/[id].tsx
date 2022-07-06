@@ -1,7 +1,10 @@
+import { useRouter } from "next/router";
+
 const courseID = () => {
+    const router = useRouter();    
     return (
         <div>
-            Enter
+            {router.query.id}
         </div>
     );
 }

@@ -1,38 +1,47 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
-import { motion, useCycle } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import useWindowDimensions from "hooks/useWindowDimensions"
+import { useState } from "react"
+
+import { useRouter } from "next/router"
+
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
 import RegisterModal from "components/RegisterModal/modal"
 import * as React from 'react';
 
+import NavLink, { NavLinkType } from "./NavLink"
 
 const Navbar = () => {
-	const links = {
-		"Home":"",
-		"Courses":"courses",
-		"About":"about",
-		"Contact":"contact",
-	}
-
-	const listVariants = {
-		open: {
-			transition: { staggerChildren: 0.07, delayChildren: 0.2 }
+	const links = [
+		{
+			name: "Home",
+			path: "",
 		},
-		closed: {
-			transition: { staggerChildren: 0.05, staggerDirection: -1 }
-		}
-	};
+		{
+			name: "Courses",
+			path: "courses",
+		},
+		{
+			name: "About",
+			path: "about",
+		},
+		{
+			name: "Contact",
+			path: "contact",
+		},
+	] as NavLinkType[]
 
 	const { height, width } = useWindowDimensions();
-	const [isOpen, toggleOpen] = useCycle(false, true);
+	const router = useRouter();
+	const [isOpen, toggleOpen] = useState(false);
 
 	const [register, toggleRegister] = React.useState(false)
 
 	return (
 		<motion.div
-			className="fixed w-full"
+			className="fixed w-full z-50"
 			animate={{ y: ["-100%", width! > 1024 ? "35%" : "0%"] }}
 			viewport={{ once: true }}
 			transition={{ delay: 0.4, duration: 0.4 }}
@@ -50,32 +59,42 @@ const Navbar = () => {
 					</Link>
 					{/* Center links */}
 					<div
-						className="
-							justify-between items-center w-full
-							absolute top-[100%] left-0
-							lg:flex lg:static lg:w-auto"
+						className="hidden lg:flex justify-between items-center"
 						id="mobile-menu-4"
 					>
-						<motion.ul
-							className="text-black flex flex-col lg:flex-row lg:space-x-8 mt-0 lg:text-sm lg:font-medium"
-							variants={listVariants}
-							animate={isOpen || width! > 1024 ? "open" : "closed"}
-							initial={false}
-						>
+						<ul className="text-white flex flex-row space-x-8 text-sm font-medium" >
 							{
-								Object
-									.entries(links)
-									.map((link, i) =>
-										<MenuItem linkName={link[0]} linkPath={link[1]} key={i}/>
-									)
+								links.map((link, i) =>
+									<NavLink link={link} key={i} toggle={toggleOpen}/>
+								)
 							}
-						</motion.ul>
+						</ul>
 					</div>
 
 					{/* Right side */}
 					<div className="flex items-center">
-						<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
+						<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+							<Link href="/auth">
+								<a>
+									Get started
+								</a>
+							</Link>
+						</button>
 						<MenuToggle isOpen={isOpen} toggle={toggleOpen} />
+					</div>
+
+					{/* Mobile Links */}
+					<div className="w-full absolute top-[100%] left-0">
+						<motion.ul className="flex flex-col" >
+							<AnimatePresence>
+								{
+									isOpen &&
+									links.map((link, i) =>
+										<MenuItem link={link} key={i} elementNum={i} toggle={toggleOpen}/>
+									)
+								}
+							</AnimatePresence>
+						</motion.ul>
 					</div>
 				</div>
 			</nav>

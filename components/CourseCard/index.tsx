@@ -3,12 +3,25 @@ import Course from "types/Course";
 import { motion } from "framer-motion";
 
 const CourseCard = ({course}: {course: Course}) => {
+	const variants = {
+		hidden: { opacity: 0, y: 60 },
+		visible: { opacity: 1, y: 0 },
+	}
+
 	return (
 		<Link href={course.courseURL}>
 			<motion.a
 				className="w-full h-full block rounded-lg pt-16 text-white hover:cursor-pointer relative overflow-hidden group"
-				initial={{ y:60, opacity: 0 }}
-				whileInView={{ y:0, opacity: 1 }}
+				initial={"hidden"}
+				whileInView={"visible"}
+				variants={variants}
+				transition={{
+					y:{
+						duration: 0.75,
+						type: "tween",
+						ease: "easeOut"
+					}
+				}}
 				viewport={{ once: true }}
 			>
 				{/* Background Image */}

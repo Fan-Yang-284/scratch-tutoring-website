@@ -1,38 +1,31 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { NavLinkType } from "./NavLink";
+import NavLink from "./NavLink";
 
-const variants = {
-	open: {
-		y: 0,
-		opacity: 1,
-		transition: {
-			y: { stiffness: 1000, velocity: -100 }
+const MenuItem = ({ link, elementNum, toggle }: { link: NavLinkType, elementNum : number, toggle:any}) => {
+	
+	const delay = 0.05;
+	const variants = {
+		open: {
+			y: 0,
+			opacity: 1,
+			transition: {
+				y: { stiffness: 1000, velocity: -100 },
+				delay: elementNum * delay
+			}
+		},
+		closed: {
+			y: 50,
+			opacity: 0,
+			transition: {
+				y: { stiffness: 1000 },
+				delay: (4-elementNum) * delay
+			}
 		}
-	},
-	closed: {
-		y: 50,
-		opacity: 0,
-		transition: {
-			y: { stiffness: 1000 }
-		}
-	}
-};
-
-const MenuItem = ({ linkName, linkPath }: { linkName: string, linkPath: string}) => {
-	const router = useRouter();
+	};
 	return (
-		<motion.li variants={variants}>
-			<Link href={"/" + linkPath} >
-				<a className={"block py-2 px-4 transition-colors lg:bg-transparent hover:text-gray-500 " +
-					(router.pathname.split("/")[1] == linkPath ?
-					"bg-blue-700 font-bold text-gray-400" :
-					"bg-blue-900 text-gray-400"
-					)}
-				>
-					{linkName}
-				</a>
-			</Link>
+		<motion.li variants={variants} initial={"closed"} animate={"open"} exit={"closed"}>
+			<NavLink link={link} toggle={toggle}/>
 		</motion.li>
 	)
 }
