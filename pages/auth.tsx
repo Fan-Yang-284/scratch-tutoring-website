@@ -17,7 +17,7 @@ const signup = () => {
 
 	return(
 		<div className="h-screen w-screen grid place-items-center">
-			<div className="w-full lg:w-9/12 2xl:w-7/12 flex lg:overflow-hidden lg:shadow-md rounded-lg transition-all">
+			<div className="w-full lg:w-9/12 xl:w-7/12 xl:border-10 2xl:w-6/12 flex lg:overflow-hidden lg:shadow-md rounded-lg transition-all">
 				{/* left side */}
 				<div
 					className="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover"
