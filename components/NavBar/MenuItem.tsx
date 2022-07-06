@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { NavLinkType } from "./NavLink";
+import NavLink from "./NavLink";
 
-const MenuItem = ({ linkName, linkPath, elementNum }: { linkName: string, linkPath: string, elementNum : number}) => {
-	const router = useRouter();
+const MenuItem = ({ link, elementNum, toggle }: { link: NavLinkType, elementNum : number, toggle:any}) => {
 	
 	const delay = 0.05;
 	const variants = {
@@ -26,16 +25,7 @@ const MenuItem = ({ linkName, linkPath, elementNum }: { linkName: string, linkPa
 	};
 	return (
 		<motion.li variants={variants} initial={"closed"} animate={"open"} exit={"closed"}>
-			<Link href={"/" + linkPath} >
-				<a className={"block py-2 px-4 transition-colors lg:bg-transparent hover:text-gray-500 " +
-					(router.pathname.split("/")[1] == linkPath ?
-					"bg-blue-700 font-bold text-gray-400" :
-					"bg-blue-900 text-gray-400"
-					)}
-				>
-					{linkName}
-				</a>
-			</Link>
+			<NavLink link={link} toggle={toggle}/>
 		</motion.li>
 	)
 }

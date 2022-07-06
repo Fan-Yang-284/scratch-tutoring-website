@@ -13,7 +13,7 @@ const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & 
 
 export const MenuToggle = ({ toggle, isOpen }: {isOpen: boolean, toggle: any}) => (
 	<motion.button
-		onClick={toggle} 
+		onClick={()=>toggle((e:boolean)=>!e)} 
 		animate={isOpen ? "open" : "closed"}
 		className="inline-flex items-center p-[0.55rem] rounded-lg lg:hidden 
 			hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200
