@@ -3,12 +3,16 @@ import 'public/Playfair-Display/playfair-display-sheet.css'
 import 'public/Raleway/raleway-sheet.css'
 
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import Navbar from '../components/NavBar'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   return(
     <>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      </Head>
       <Navbar/>
       <AnimatePresence exitBeforeEnter initial={false}>
         <motion.div
