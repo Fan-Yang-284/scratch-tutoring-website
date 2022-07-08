@@ -7,11 +7,13 @@ import Head from 'next/head'
 import Navbar from '../components/NavBar'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import Favicon from "../public/favicon.ico"
+
 function MyApp({ Component, pageProps, router }: AppProps) {
   return(
     <>
       <Head>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href={Favicon.src} type="image/x-icon" />
       </Head>
       <Navbar/>
       <AnimatePresence exitBeforeEnter initial={false}>
