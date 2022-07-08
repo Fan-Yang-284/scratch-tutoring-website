@@ -4,6 +4,7 @@ import { useForm } from '@mantine/form';
 import courses from '../data/courses';
 import Link from 'next/link';
 import Head from 'next/head';
+import DateComponent from "../components/DateComponent"
 
 interface fieldProps {
 	fieldFor: string,
@@ -50,12 +51,7 @@ const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: st
 									<p>
 										{selectedCourse.description}
 									</p>
-									<div className="flex flex-row gap-x-2 items-center mb-2">
-										<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-											<path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-										</svg>
-										<span>{selectedCourse.startDate.toLocaleString(undefined, { weekday: 'short', day: "numeric", month: "short" })} - {selectedCourse.endDate.toLocaleString(undefined, { weekday: 'short', day: "numeric", month: "short" })}</span>
-									</div>
+									<DateComponent startDate={selectedCourse.startDate} endDate={selectedCourse.endDate}/>
 								</>
 								:
 								<>
