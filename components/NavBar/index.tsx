@@ -8,8 +8,6 @@ import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
 import NavLink, { NavLinkType } from "./NavLink"
 
-import LogoSVG from "../../public/Logo.svg"
-
 const Navbar = () => {
 	const links = [
 		{
@@ -45,8 +43,7 @@ const Navbar = () => {
 					{/* Left Side Image */}
 					<Link href="/">
 						<a className="flex items-center">
-							{/* <Image src="/Logo.svg" width={36} height={36} className="mr-3"/> */}
-							<img src={LogoSVG.src} className="rounded mr-3 h-12 sm:h-9" alt="Flare Code Academy Logo" />
+							<img src="/logo.svg" className="rounded mr-3 h-12 sm:h-9" alt="Flare Code Academy Logo" />
 							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">
 								Flare Code Academy
 							</span>
