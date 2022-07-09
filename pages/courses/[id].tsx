@@ -39,7 +39,7 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 	return (
 		<>
 			<Head>
-				<title>{activeCourse.title}</title>
+				<title>{activeCourse.title} | Flare</title>
 			</Head>
 
 			{/* Banner */}

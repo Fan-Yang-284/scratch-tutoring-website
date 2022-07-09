@@ -8,7 +8,7 @@ const course_materials = () => {
 	return (
 		<>
 			<Head>
-				<title>Flare Courses</title>
+				<title>Courses | Flare</title>
 			</Head>
 			<div>
 				<div className="h-96 grid place-items-center bg-blue-400">

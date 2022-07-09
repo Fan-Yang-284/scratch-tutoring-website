@@ -100,7 +100,7 @@ const Register = () => {
 	return (
 		<>
 			<Head>
-				<title>Register</title>
+				<title>Register | Flare</title>
 			</Head>
 			<div className="grid md:grid-cols-5 pt-24 lg:pt-32 pb-12 px-4 lg:px-16 bg-slate-200 min-h-screen">
 				<div className="md:col-span-2">
