@@ -17,7 +17,7 @@ const signup = () => {
 
 	return(
 		<div className="h-screen w-screen grid place-items-center">
-			<div className="w-full lg:w-9/12 2xl:w-7/12 flex lg:overflow-hidden lg:shadow-md rounded-lg transition-all">
+			<div className="w-full lg:w-9/12 xl:w-7/12 xl:border-10 2xl:w-6/12 flex lg:overflow-hidden lg:shadow-md rounded-lg transition-all">
 				{/* left side */}
 				<div
 					className="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover"
@@ -215,7 +215,7 @@ const signup = () => {
 							<div className="px-8 mb-4 text-center">
 								<h3 className="pt-4 mb-2 text-2xl">Forgot Your Password?</h3>
 								<p className="mb-4 text-sm text-gray-700">
-									We get it, stuff happens. Just enter your email address below and we'll send you a
+									We get it, stuff happens.Just enter your email address below and we&apos;ll send you a
 									link to reset your password!
 								</p>
 							</div>

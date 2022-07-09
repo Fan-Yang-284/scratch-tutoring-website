@@ -1,10 +1,8 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import useWindowDimensions from "hooks/useWindowDimensions"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 import { useState } from "react"
-
-import { useRouter } from "next/router"
 
 import MenuItem from "./MenuItem"
 import { MenuToggle } from "./MenuToggle"
@@ -34,7 +32,6 @@ const Navbar = () => {
 	] as NavLinkType[]
 
 	const { height, width } = useWindowDimensions();
-	const router = useRouter();
 	const [isOpen, toggleOpen] = useState(false);
 
 	const [register, toggleRegister] = React.useState(false)
@@ -51,9 +48,12 @@ const Navbar = () => {
 					{/* Left Side Image */}
 					<Link href="/">
 						<a className="flex items-center">
-							<img src="/scratch.png" className="rounded mr-3 h-12 sm:h-9" alt="Scratch Logo" />
+							<img src="/logo.svg" className="rounded mr-3 h-12 sm:h-9" alt="Flare Code Academy Logo" />
 							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">
-								Edwin and Fan Tutoring
+								Flare Code Academy
+							</span>
+							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white block sm:hidden">
+								Flare
 							</span>
 						</a>
 					</Link>
@@ -73,13 +73,13 @@ const Navbar = () => {
 
 					{/* Right side */}
 					<div className="flex items-center">
-						<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-							<Link href="/auth">
-								<a>
+						<Link href="/register">
+							<a>
+								<button type="button" className="text-white bg-blue-700 hover:bg-blue-800 transition-colors focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 									Get started
-								</a>
-							</Link>
-						</button>
+								</button>
+							</a>
+						</Link>
 						<MenuToggle isOpen={isOpen} toggle={toggleOpen} />
 					</div>
 

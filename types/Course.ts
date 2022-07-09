@@ -5,4 +5,5 @@ export default interface Course {
     endDate: Date;
     backgroundImage: string
     courseURL: string;
+    price: number;
 }

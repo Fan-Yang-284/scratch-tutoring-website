@@ -7,7 +7,7 @@ const Banner = () => {
                 Scratch for Kids
             </h1>
             <h3 className="text-md text-gray-500">
-                Jump into the world of programming with MIT's fun-to-learn Scratch language
+                Jump into the world of programming with MIT&apos;s fun-to-learn Scratch language
             </h3>
             <hr></hr>
         </div>
