@@ -39,7 +39,7 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 			</Head>
 
 			{/* Banner */}
-			<div className="overflow-hidden h-[60vh] relative bg-cover mb-8" style={{ backgroundImage: `url(${activeCourse.backgroundImage})`}} />
+			<div className="overflow-hidden h-[60vh] min-h-[20rem] relative bg-cover bg-center mb-8" style={{ backgroundImage: `url(${activeCourse.backgroundImage})`}} />
 			
 			{/* Content */}
 			<div className="mx-4">
@@ -52,8 +52,8 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 						<Avatar src="/Fan_Avatar.png"/>
 					</AvatarsGroup>
 				</div>
-				<div className="grid grid-cols-3">
-					<div className="col-span-1">
+				<div className="grid md:grid-cols-3">
+					<div className="col-span-0 md:col-span-1">
 					</div>
 					<div className="col-span-2 grid grid-cols-3 gap-y-2">
 						<h2>Description</h2>
@@ -64,8 +64,8 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 						<hr className="col-span-3"/>
 
 						<h2>Time</h2>
-							<DateComponent startDate={activeCourse.startDate} endDate={activeCourse.endDate} />
 						<div className="col-span-2">
+							<DateComponent startDate={activeCourse.startDate} endDate={activeCourse.endDate} />
 							<p>9-11am EST</p>
 						</div>
 
@@ -73,20 +73,20 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 
 						<h2>Price</h2>
 						<p className="text-green-600 font-bold text-2xl col-span-2">${activeCourse.price}</p>
+						<div className="flex justify-center mt-4 col-span-3">
+							<Link href="/register">
+								<a>
+									<button
+										className="p-4 bg-blue-400 text-2xl font-bold rounded-lg"
+									>
+										Register
+									</button>
+								</a>
+							</Link>
+						</div>
 					</div>
 				</div>
 
-				<div className="flex justify-center mt-4">
-					<Link href="/register">
-						<a>
-							<button
-								className={"p-4 text-7xl rounded-lg " + gradientAnimation.animateGradientBackground}
-							>
-								REGISTER NOW!!!!!
-							</button>
-						</a>
-					</Link>
-				</div>
 			</div>
 		</>
 	);
