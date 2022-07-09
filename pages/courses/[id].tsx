@@ -32,7 +32,7 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 			</Head>
 			<div>
 				<div className="grid md:grid-cols-2 mx-4 md:mx-16 pt-32 gap-x-4 gap-y-6">
-					<img src={activeCourse.backgroundImage} className="rounded-lg"/>
+					<img src={activeCourse.backgroundImage} className="rounded-lg" alt="Course Background Image"/>
 					{/* words */}
 					<div>
 						<h1 className="font-bold text-6xl mb-2">

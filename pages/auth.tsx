@@ -2,8 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const signup = () => {
-	// signin, signup, forgot
+const Signup = () => {
+	// signin, Signup, forgot
 	const [authState, toggleAuthState] = useState("signin");
 	const authVariants = {
 		closed: { opacity: 0, y: -100 },
@@ -80,7 +80,7 @@ const signup = () => {
 								<div className="text-center">
 									<a
 										className="hover:cursor-pointer inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-										onClick={() => toggleAuthState("signup")}
+										onClick={() => toggleAuthState("Signup")}
 									>
 										Create an Account!
 									</a>
@@ -97,7 +97,7 @@ const signup = () => {
 						</motion.div>
 					}
 					{
-						authState === "signup" &&
+						authState === "Signup" &&
 						<motion.div
 							variants={authVariants}
 							initial={"closed"}
@@ -243,7 +243,7 @@ const signup = () => {
 								<div className="text-center">
 									<a
 										className="hover:cursor-pointer inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-										onClick={()=>{toggleAuthState("signup")}}
+										onClick={()=>{toggleAuthState("Signup")}}
 									>
 										Create an Account!
 									</a>
@@ -265,4 +265,4 @@ const signup = () => {
 	)
 }
 
-export default signup;
+export default Signup;

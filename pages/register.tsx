@@ -42,7 +42,7 @@ const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: st
 						{/* Image */}
 						<div className="h-36 w-full lg:w-48 overflow-hidden grid place-items-center">
 							{selectedCourse ?
-								<img src={selectedCourse.backgroundImage} className="w-full" /> :
+								<img src={selectedCourse.backgroundImage} className="w-full" alt="Selected Course Image"/> :
 								<Skeleton className="w-full h-full" />
 							}
 						</div>
@@ -74,7 +74,7 @@ const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: st
 	)
 }
 
-const register = () => {
+const Register = () => {
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -157,4 +157,4 @@ const register = () => {
 	);
 }
 
-export default register;
+export default Register;
