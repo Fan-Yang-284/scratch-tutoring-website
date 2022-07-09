@@ -8,11 +8,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import DateComponent from "../../components/DateComponent";
 import courses from "../../data/courses";
 import Course from "../../types/Course";
-import gradientAnimation from "../../styles/gradientAnimation.module.scss";
 
 // analytics
-import { analytics } from "../../firebase";
-import { logEvent } from "firebase/analytics";
+import { app } from '../../firebase/index'
+import { getAnalytics, isSupported, logEvent } from "firebase/analytics";
+import { useEffect } from "react";
 
 const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 	const activeCourse = JSON.parse(activeCourseString) as Course;
@@ -27,11 +27,15 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 		)
 	}
 
-	if(process.env.NODE_ENV === "production"){
-		logEvent(analytics, "course_view", {
-			courseTitle: activeCourse.title,
-		})
-	}
+	useEffect(() => {
+		isSupported().then(supported => {
+			const analytics = supported ? getAnalytics(app) : null
+			if (process.env.NODE_ENV === 'production' && analytics != null) {
+				logEvent(analytics, "course_view")
+			}
+		});
+	}, [])
+	
 	return (
 		<>
 			<Head>

@@ -7,8 +7,8 @@ import Head from 'next/head';
 import DateComponent from "../components/DateComponent"
 
 // analytics
-import { analytics } from '../firebase'
-import { logEvent } from 'firebase/analytics'
+import { app } from '../firebase/index'
+import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
 import { useEffect } from 'react';
 
 interface fieldProps {
@@ -89,10 +89,12 @@ const Register = () => {
 	});
 
 	useEffect(()=>{
-		if (process.env.NODE_ENV === 'production') {
-			logEvent(analytics, "register_view")
-		}
-		console.log(process.env.NODE_ENV)
+		isSupported().then(supported => {
+			const analytics = supported ? getAnalytics(app) : null
+			if (process.env.NODE_ENV === 'production' && analytics != null) {
+				logEvent(analytics, "register_view")
+			}
+		});
 	}, [])
 
 	return (

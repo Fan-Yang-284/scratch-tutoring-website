@@ -7,8 +7,6 @@ import Head from 'next/head'
 import Navbar from '../components/NavBar'
 import { motion, AnimatePresence } from 'framer-motion'
 
-
-
 function MyApp({ Component, pageProps, router }: AppProps) {
   return(
     <>

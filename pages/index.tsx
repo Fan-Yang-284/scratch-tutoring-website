@@ -1,13 +1,20 @@
 import Hero from '../components/Hero'
 import Head from 'next/head'
 
-import { analytics } from '../firebase'
-import { logEvent } from 'firebase/analytics'
+import { app } from '../firebase/index'
+import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
+import { useEffect } from 'react'
 
 export default function Home() {
-  if(process.env.NODE_ENV === "production"){
-    logEvent(analytics, "home_view")
-  }
+  useEffect(() => {
+    isSupported().then(supported => {
+      const analytics = supported ? getAnalytics(app) : null
+      if (process.env.NODE_ENV === 'production' && analytics != null) {
+        logEvent(analytics, "home_view")
+      }
+    });
+  }, [])
+
   return (
     <>
       <Head>
