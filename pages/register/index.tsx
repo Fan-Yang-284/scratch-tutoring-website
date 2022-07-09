@@ -11,6 +11,7 @@ import { app } from '../../firebase/index'
 import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 interface fieldProps {
 	fieldFor: string,
@@ -99,9 +100,16 @@ const Register = () => {
 	}, [])
 
 	const router = useRouter()
-	const onSubmit = (values: any) => {
+	const onSubmit = async (values: any) => {
 		console.log(values)
-		router.push("/register/success")
+		try {
+			let res = await axios.post(`https://scratch-tutoring-backend.herokuapp.com/register`, values)
+			console.log(res)
+			router.push("/register/success")
+		} catch (err) {
+			console.log(err)
+			alert("Tough")
+		}
 	}
 
 	return (
