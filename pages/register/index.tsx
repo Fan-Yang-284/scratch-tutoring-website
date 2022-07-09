@@ -1,15 +1,16 @@
 // Inspiration https://cdn.dribbble.com/userupload/2715803/file/original-2daa043d16e519835d6a677fe2ee0b93.png
 import { Select, TextInput, Skeleton } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import courses from '../data/courses';
+import courses from '../../data/courses';
 import Link from 'next/link';
 import Head from 'next/head';
-import DateComponent from "../components/DateComponent"
+import DateComponent from "../../components/DateComponent"
 
 // analytics
-import { analytics } from '../firebase'
-import { logEvent } from 'firebase/analytics'
+import { app } from '../../firebase/index'
+import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 interface fieldProps {
 	fieldFor: string,
@@ -89,16 +90,24 @@ const Register = () => {
 	});
 
 	useEffect(()=>{
-		if (process.env.NODE_ENV === 'production') {
-			logEvent(analytics, "register_view")
-		}
-		console.log(process.env.NODE_ENV)
+		isSupported().then(supported => {
+			const analytics = supported ? getAnalytics(app) : null
+			if (process.env.NODE_ENV === 'production' && analytics != null) {
+				logEvent(analytics, "register_view")
+			}
+		});
 	}, [])
+
+	const router = useRouter()
+	const onSubmit = (values: any) => {
+		console.log(values)
+		router.push("/register/success")
+	}
 
 	return (
 		<>
 			<Head>
-				<title>Register</title>
+				<title>Register | Flare</title>
 			</Head>
 			<div className="grid md:grid-cols-5 pt-24 lg:pt-32 pb-12 px-4 lg:px-16 bg-slate-200 min-h-screen">
 				<div className="md:col-span-2">
@@ -109,7 +118,7 @@ const Register = () => {
 				<div className="md:col-span-3">
 					<form
 						className="p-4 border-2 rounded-lg bg-white grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-2"
-						onSubmit={form.onSubmit((values) => console.log(values))}
+						onSubmit={form.onSubmit((values) => onSubmit(values))}
 					>
 						<Title>Personal Information</Title>
 						{/* first name last name */}
