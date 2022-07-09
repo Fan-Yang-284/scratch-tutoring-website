@@ -16,6 +16,8 @@ export default function Home() {
       <div>
         {/* <Banner/> */}
         <Hero/>
+        {/* About us */}
+        
       </div>
     </>
   )
