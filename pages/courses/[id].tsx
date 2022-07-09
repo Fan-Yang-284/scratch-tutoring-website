@@ -4,6 +4,9 @@ import courses from "../../data/courses";
 import Course from "../../types/Course";
 import Head from "next/head";
 
+import { analytics } from "../../firebase";
+import { logEvent } from "firebase/analytics";
+
 const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 	const activeCourse = JSON.parse(activeCourseString) as Course;
 	activeCourse.startDate = new Date(activeCourse.startDate);
@@ -15,6 +18,12 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 				<h1 className="text-4xl font-bold">Course Not Found</h1>
 			</div>
 		)
+	}
+
+	if(process.env.NODE_ENV === "production"){
+		logEvent(analytics, "course_view", {
+			courseTitle: activeCourse.title,
+		})
 	}
 	return (
 		<>
