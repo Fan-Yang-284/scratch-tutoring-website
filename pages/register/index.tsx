@@ -80,8 +80,8 @@ const Register = () => {
 	const form = useForm({
 		initialValues: {
 			email: '',
-			firstName: '',
-			lastName: '',
+			firstname: '',
+			lastname: '',
 			course: '',
 		},
 
@@ -130,8 +130,8 @@ const Register = () => {
 					>
 						<Title>Personal Information</Title>
 						{/* first name last name */}
-						<Field fieldFor="First Name" type="text" placeholder="First Name" formObject={form.getInputProps("firstName")}/>
-						<Field fieldFor="Last Name" type="text" placeholder="Last Name" formObject={form.getInputProps("lastName")}/>
+						<Field fieldFor="First Name" type="text" placeholder="First Name" formObject={form.getInputProps("firstname")}/>
+						<Field fieldFor="Last Name" type="text" placeholder="Last Name" formObject={form.getInputProps("lastname")}/>
 						{/* email */}
 						<TextInput
 							label="Email"
