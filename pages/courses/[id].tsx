@@ -3,7 +3,6 @@ import DateComponent from "../../components/DateComponent";
 import courses from "../../data/courses";
 import Course from "../../types/Course";
 import Head from "next/head";
-import Image from "next/image";
 
 const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 	const activeCourse = JSON.parse(activeCourseString) as Course;
@@ -24,7 +23,7 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 			</Head>
 			<div>
 				<div className="grid md:grid-cols-2 mx-4 md:mx-16 pt-32 gap-x-4 gap-y-6">
-					<Image src={activeCourse.backgroundImage} className="rounded-lg" alt="Course Background Image"/>
+					<img src={activeCourse.backgroundImage} className="rounded-lg" alt="Course Background Image"/>
 					{/* words */}
 					<div>
 						<h1 className="font-bold text-6xl mb-2">
