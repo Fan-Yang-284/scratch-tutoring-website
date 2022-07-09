@@ -7,7 +7,6 @@ import { useState } from "react";
 import MenuItem from "./MenuItem";
 import { MenuToggle } from "./MenuToggle";
 //import RegisterModal from "components/RegisterModal/modal"
-import * as React from 'react';
 
 import NavLink, { NavLinkType } from "./NavLink";
 
@@ -22,10 +21,6 @@ const Navbar = () => {
 			path: "courses",
 		},
 		{
-			name: "About",
-			path: "about",
-		},
-		{
 			name: "Contact",
 			path: "contact",
 		},
@@ -33,8 +28,6 @@ const Navbar = () => {
 
 	const { height, width } = useWindowDimensions();
 	const [isOpen, toggleOpen] = useState(false);
-
-	const [register, toggleRegister] = React.useState(false)
 
 	return (
 		<motion.div

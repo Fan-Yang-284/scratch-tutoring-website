@@ -6,6 +6,11 @@ import Link from 'next/link';
 import Head from 'next/head';
 import DateComponent from "../components/DateComponent"
 
+// analytics
+import { analytics } from '../firebase'
+import { logEvent } from 'firebase/analytics'
+import { useEffect } from 'react';
+
 interface fieldProps {
 	fieldFor: string,
 	placeholder: string,
@@ -82,6 +87,13 @@ const Register = () => {
 			email: (value) => (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) ? null : 'Invalid email'),
 		},
 	});
+
+	useEffect(()=>{
+		if (process.env.NODE_ENV === 'production') {
+			logEvent(analytics, "register_view")
+		}
+		console.log(process.env.NODE_ENV)
+	}, [])
 
 	return (
 		<>
