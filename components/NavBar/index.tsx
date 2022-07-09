@@ -1,15 +1,16 @@
 // Heavily-inspired by https://flowbite.com/docs/components/navbar/
-import { motion, AnimatePresence } from "framer-motion"
-import Link from "next/link"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
-import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image"
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useState } from "react";
 
-import MenuItem from "./MenuItem"
-import { MenuToggle } from "./MenuToggle"
-import RegisterModal from "components/RegisterModal/modal"
+import MenuItem from "./MenuItem";
+import { MenuToggle } from "./MenuToggle";
+//import RegisterModal from "components/RegisterModal/modal"
 import * as React from 'react';
 
-import NavLink, { NavLinkType } from "./NavLink"
+import NavLink, { NavLinkType } from "./NavLink";
 
 const Navbar = () => {
 	const links = [
@@ -48,7 +49,7 @@ const Navbar = () => {
 					{/* Left Side Image */}
 					<Link href="/">
 						<a className="flex items-center">
-							<img src="/logo.svg" className="rounded mr-3 h-12 sm:h-9" alt="Flare Code Academy Logo" />
+							<Image src="/logo.svg" className="rounded mr-3 h-12 sm:h-9" width="50%" height="50%" alt="Flare Code Academy Logo" />
 							<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden sm:block">
 								Flare Code Academy
 							</span>

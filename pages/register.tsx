@@ -4,6 +4,7 @@ import { useForm } from '@mantine/form';
 import courses from '../data/courses';
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import DateComponent from "../components/DateComponent"
 
 interface fieldProps {
@@ -37,7 +38,7 @@ const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: st
 						{/* Image */}
 						<div className="h-36 w-full lg:w-48 overflow-hidden grid place-items-center">
 							{selectedCourse ?
-								<img src={selectedCourse.backgroundImage} className="w-full" /> :
+								<Image src={selectedCourse.backgroundImage} className="w-full" alt="Selected Course Image"/> :
 								<Skeleton className="w-full h-full" />
 							}
 						</div>
@@ -69,7 +70,7 @@ const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: st
 	)
 }
 
-const register = () => {
+const Register = () => {
 	const form = useForm({
 		initialValues: {
 			email: '',
@@ -145,4 +146,4 @@ const register = () => {
 	);
 }
 
-export default register;
+export default Register;
