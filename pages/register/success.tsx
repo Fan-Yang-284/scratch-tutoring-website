@@ -20,7 +20,7 @@ const success = () => {
 					<h2 className="text-xl font-semibold">Next steps</h2>
 					<ol className="list-decimal pl-4">
 						<li>
-							Send Payment via <strong>Interac E-transfer</strong> to 
+							Send Payment of ${activeCourse?.price} via <strong>Interac E-transfer</strong> to 
 							<span className="ml-1 inline-flex flex-row gap-x-1">
 								<strong>jessicawu414@gmail.com</strong>
 								{
