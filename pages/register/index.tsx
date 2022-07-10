@@ -163,7 +163,7 @@ const Register = () => {
 						<div className="col-span-1 sm:col-span-2">
 							<CourseDescriptionCard selectedCourse={selectedCourse}/>
 						</div>
-						<div className="col-span-2">
+						<div className="md:col-span-2">
 							<hr className="mt-4"/>
 							<div className="flex flex-row justify-between items-end mt-2">
 								<p>
