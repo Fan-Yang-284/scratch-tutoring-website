@@ -12,6 +12,7 @@ import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Course from '../../types/Course';
 
 interface fieldProps {
 	fieldFor: string,
@@ -34,8 +35,7 @@ const Field = ({ fieldFor, placeholder, type, className, formObject }: fieldProp
 const Title = ({ children }: { children: any }) =>
 	<h1 className="col-span-1 sm:col-span-2 text-xl font-bold mt-4 font-serif text-blue-800" style={{ fontVariant: "small-caps" }}>{children}</h1>
 
-const CourseDescriptionCard = ({ selectedCourseName }: { selectedCourseName?: string})=>{
-	const selectedCourse = courses.filter(course => course.title == selectedCourseName)[0]
+const CourseDescriptionCard = ({ selectedCourse }: { selectedCourse?: Course})=>{
 	return (
 		<div className="xl:w-2/3">
 			<Link href={selectedCourse ? ("/courses" + selectedCourse.courseURL) : ""}>
@@ -112,6 +112,9 @@ const Register = () => {
 		}
 	}
 
+	const selectedCourseName = form.getInputProps('course').value as string | undefined
+	const selectedCourse = courses.find(course => course.title == selectedCourseName)
+
 	return (
 		<>
 			<Head>
@@ -158,8 +161,26 @@ const Register = () => {
 						/>
 						{/* course description box */}
 						<div className="col-span-1 sm:col-span-2">
-							<CourseDescriptionCard selectedCourseName={form.getInputProps('course').value as string|undefined}/>
+							<CourseDescriptionCard selectedCourse={selectedCourse}/>
 						</div>
+						<div className="col-span-2">
+							<hr className="mt-4"/>
+							<div className="flex flex-row justify-between items-end mt-2">
+								<p>
+									Amount
+								</p>
+								{
+									selectedCourse ? 
+									<p className="text-3xl font-bold">
+										${selectedCourse?.price}
+									</p>
+									:
+									<p className="text-3xl font-bold">-</p>
+								}
+							</div>
+						</div>
+						
+
 						{/* Register Button */}
 						<button
 							type="submit"
