@@ -1,10 +1,12 @@
 // Inspiration https://cdn.dribbble.com/userupload/2715803/file/original-2daa043d16e519835d6a677fe2ee0b93.png
+import DateComponent from "../../components/DateComponent"
+import courses from '../../data/courses';
+import Course from '../../types/Course';
+
 import { Select, TextInput, Skeleton } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import courses from '../../data/courses';
 import Link from 'next/link';
 import Head from 'next/head';
-import DateComponent from "../../components/DateComponent"
 
 // analytics
 import { app } from '../../firebase/index'
@@ -12,7 +14,6 @@ import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import Course from '../../types/Course';
 
 interface fieldProps {
 	fieldFor: string,
@@ -104,9 +105,10 @@ const Register = () => {
 		if(process.env.NODE_ENV === 'production'){
 			await axios.post(`https://scratch-tutoring-backend.herokuapp.com/register`, values).catch(err=>{
 				console.log(err)
-				alert("Tough")
+				alert("Database Error, try again")
 				return
 			})
+			if (await isSupported()) logEvent(getAnalytics(app), "register_submit")
 		}else{
 			alert("Post to Server")
 		}
