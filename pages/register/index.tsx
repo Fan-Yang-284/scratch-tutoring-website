@@ -3,7 +3,7 @@ import DateComponent from "../../components/DateComponent"
 import courses from '../../data/courses';
 import Course from '../../types/Course';
 
-import { Select, TextInput, Skeleton } from '@mantine/core';
+import { Select, TextInput, Skeleton, Loader } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -11,7 +11,7 @@ import Head from 'next/head';
 // analytics
 import { app } from '../../firebase/index'
 import { logEvent, isSupported, getAnalytics } from 'firebase/analytics'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
@@ -20,13 +20,14 @@ interface fieldProps {
 	placeholder: string,
 	type: string,
 	className?: string,
-	formObject: any
+	formObject: any,
+	disabled: boolean
 }
-const Field = ({ fieldFor, placeholder, type, className, formObject }: fieldProps)=>{
+const Field = ({ fieldFor, placeholder, type, className, formObject, disabled }: fieldProps)=>{
 	if(type == "text"){
 		return(
 			<div className={className}>
-				<TextInput className="w-full" label={fieldFor} placeholder={placeholder} required {...formObject}/>
+				<TextInput className="w-full" label={fieldFor} placeholder={placeholder} required {...formObject} disabled={disabled}/>
 			</div>
 		)
 	}
@@ -100,17 +101,22 @@ const Register = () => {
 		});
 	}, [])
 
+	const [Loading, setLoading] = useState(false);
+
 	const router = useRouter()
 	const onSubmit = async (values: any) => {
+		setLoading(true)
 		if(process.env.NODE_ENV === 'production'){
 			await axios.post(`https://scratch-tutoring-backend.herokuapp.com/register`, values).catch(err=>{
 				console.log(err)
 				alert("Database Error, try again")
+				setLoading(false)
 				return
 			})
 			if (await isSupported()) logEvent(getAnalytics(app), "register_submit")
 		}else{
 			alert("Post to Server")
+			await new Promise(resolve=>setTimeout(resolve, 2000))
 		}
 		router.push({
 			pathname: '/register/success',
@@ -141,8 +147,8 @@ const Register = () => {
 					>
 						<Title>Personal Information</Title>
 						{/* first name last name */}
-						<Field fieldFor="First Name" type="text" placeholder="First Name" formObject={form.getInputProps("firstname")}/>
-						<Field fieldFor="Last Name" type="text" placeholder="Last Name" formObject={form.getInputProps("lastname")}/>
+						<Field fieldFor="First Name" type="text" placeholder="First Name" formObject={form.getInputProps("firstname")} disabled={Loading}/>
+						<Field fieldFor="Last Name" type="text" placeholder="Last Name" formObject={form.getInputProps("lastname")} disabled={Loading}/>
 						{/* email */}
 						<TextInput
 							label="Email"
@@ -153,8 +159,9 @@ const Register = () => {
 									<path fillRule="evenodd" d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z" clipRule="evenodd" /></svg>
 							}
 							placeholder="Email"
-							{...form.getInputProps('email')}
 							required
+							disabled={Loading}
+							{...form.getInputProps('email')}
 						/>
 						
 						<Title>Course Information</Title>
@@ -166,6 +173,7 @@ const Register = () => {
 							label="Pick Course"
 							required
 							{...form.getInputProps('course')}
+							disabled={Loading}
 						/>
 						{/* course description box */}
 						<div className="col-span-1 sm:col-span-2">
@@ -192,9 +200,17 @@ const Register = () => {
 						{/* Register Button */}
 						<button
 							type="submit"
-							className="col-span-1 sm:col-span-2 p-2 rounded-full font-bold text-white bg-blue-500 my-4 hover:shadow-lg transition-shadow"
+							className="col-span-1 sm:col-span-2 p-2 rounded-full font-bold text-white bg-blue-500 my-4 hover:shadow-lg transition-shadow flex flex-row justify-center"
+							disabled={Loading}
 						>
-							Register
+							{
+								Loading ?
+								<Loader color="white" />
+								:
+								<>
+								Register
+								</>
+							}
 						</button>
 					</form>
 				</div>
