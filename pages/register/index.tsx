@@ -38,7 +38,7 @@ const Title = ({ children }: { children: any }) =>
 const CourseDescriptionCard = ({ selectedCourse }: { selectedCourse?: Course})=>{
 	return (
 		<div className="xl:w-2/3">
-			<Link href={selectedCourse ? ("/courses" + selectedCourse.courseURL) : ""}>
+			<Link href={selectedCourse ? ("/courses/" + selectedCourse.courseID) : ""}>
 				<a className={!selectedCourse ? "hover:cursor-default" : ""}>
 					<div className="flex flex-col lg:flex-row gap-y-3 gap-x-3 border-2 rounded-lg p-4">
 						{/* Image */}
@@ -101,15 +101,21 @@ const Register = () => {
 
 	const router = useRouter()
 	const onSubmit = async (values: any) => {
-		console.log(values)
-		try {
-			let res = await axios.post(`https://scratch-tutoring-backend.herokuapp.com/register`, values)
-			console.log(res)
-			router.push("/register/success")
-		} catch (err) {
-			console.log(err)
-			alert("Tough")
+		if(process.env.NODE_ENV === 'production'){
+			await axios.post(`https://scratch-tutoring-backend.herokuapp.com/register`, values).catch(err=>{
+				console.log(err)
+				alert("Tough")
+				return
+			})
+		}else{
+			alert("Post to Server")
 		}
+		router.push({
+			pathname: '/register/success',
+			query: {
+				courseID: selectedCourse?.courseID
+			}
+		})
 	}
 
 	const selectedCourseName = form.getInputProps('course').value as string | undefined

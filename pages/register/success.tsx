@@ -1,8 +1,13 @@
 import { useClipboard } from "@mantine/hooks";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import courses from "../../data/courses";
 
 const success = () => {
 	const clipboard = useClipboard({ timeout: 2000 });
+	const router = useRouter();
+	const { courseID } = router.query;
+	const activeCourse = courses.find(course => course.courseID == courseID);
 	return (
 		<>
 			<Head>
@@ -35,6 +40,11 @@ const success = () => {
 						<li>
 							Once payment is processed, you will recieve a confirmation email. This email will contain the meeting link.
 						</li>
+						{
+							activeCourse?.nextSteps.map((step, i)=>
+								<li key={i}>{step}</li>
+							)
+						}
 					</ol>
 				</div>
 			</div>

@@ -98,7 +98,7 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = courses.map((course) => ({
-		params: { id: course.courseURL.slice(1) },
+		params: { id: course.courseID },
 	}))
 	return {
 		paths,
@@ -109,7 +109,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	return {
 		props: {
-			activeCourseString: JSON.stringify(courses.find(course => course.courseURL === "/" + context.params!.id))
+			activeCourseString: JSON.stringify(courses.find(course => course.courseID === context.params!.id))
 		},
 	}
 }
