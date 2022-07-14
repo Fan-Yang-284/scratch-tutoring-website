@@ -8,7 +8,6 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import DateComponent from "../../components/DateComponent";
 import courses from "../../data/courses";
 import Course from "../../types/Course";
-import teachers from "../../data/teachers";
 
 // analytics
 import { app } from '../../firebase/index'
