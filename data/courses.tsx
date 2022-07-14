@@ -8,10 +8,20 @@ const courses = [
         endDate: new Date(1659106800000),
         backgroundImage: "/scratch2022Banner.jpg",
         price: 100,
+        teachers: [
+            {
+                name: "Edwin Zheng",
+                avatarURL: "/Edwin_Avatar.png"
+            },
+            {
+                name: "Fan Yang",
+                avatarURL: "/Fan_Avatar.png"
+            }
+        ],
         nextSteps:[
             <>Sign up to scratch at <a href="https://scratch.mit.edu/" className="text-blue-500 underline">scratch.mit.edu</a></>
         ]
-    },
+    }
 ] as CourseType[]
 
 export default courses;
