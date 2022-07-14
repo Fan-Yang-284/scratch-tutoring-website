@@ -39,7 +39,7 @@ const CourseCard = ({course}: {course: Course}) => {
 					<h2 className="text-4xl font-bold mb-4">
 						{course.title}
 					</h2>
-					<p>
+					<p className="min-h-[48px]">
 						{course.description}
 					</p>
 					<DateComponent startDate={course.startDate} endDate={course.endDate} className="mt-6"/>

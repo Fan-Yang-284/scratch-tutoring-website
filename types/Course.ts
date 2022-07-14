@@ -1,3 +1,4 @@
+import Teacher from "./Teacher";
 export default interface Course {
     title: string;
     courseID: string;
@@ -6,5 +7,6 @@ export default interface Course {
     endDate: Date;
     backgroundImage: string
     price: number;
+    teachers: Teacher[];
     nextSteps: JSX.Element[];
 }

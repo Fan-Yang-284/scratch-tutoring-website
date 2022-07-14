@@ -36,10 +36,11 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 		});
 	}, [])
 	
+	const title = `${activeCourse.title} | Flare`
 	return (
 		<>
 			<Head>
-				<title>{activeCourse.title} | Flare</title>
+				<title>{title}</title>
 			</Head>
 
 			{/* Banner */}
@@ -52,8 +53,11 @@ const courseID = ({ activeCourseString }: { activeCourseString: string}) => {
 						{activeCourse.title}
 					</h1>
 					<AvatarsGroup limit={2} size="lg">
-						<Avatar src="/Edwin_Avatar.png"/>
-						<Avatar src="/Fan_Avatar.png"/>
+						{
+							activeCourse.teachers.map(teacher => (
+								<Avatar key={teacher.name} src={teacher.avatarURL} />
+							))
+						}
 					</AvatarsGroup>
 				</div>
 				<div className="grid md:grid-cols-3">
